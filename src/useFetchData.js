@@ -14,31 +14,38 @@ export const useFetchData = (country) => {
     }
   }, []);
 
-  const fetchDataFromAPI = () => {
-    let url = "https://restcountries.com/v3.1/all";
+const fetchDataFromAPI = () => {
+  // رابط API صحيح مع تحديد الحقول المطلوبة
+  let url = "https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,languages,tld,currencies,languages";
 
-    setIsLoading(true);
+  setIsLoading(true);
 
-    if (country) {
-      url = `https://restcountries.com/v3.1/name/${country}`;
-    }
+  if (country) {
+    // إذا صفحة دولة واحدة
+    url = `https://restcountries.com/v3.1/name/${country}?fields=name,flags,population,region,subregion,capital,tld,currencies,languages`;
+  }
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        if (country) {
-          //Country page
-          setResult(data[0]);
-        } else {
-          //Homepage
-          setResult(data);
-          setFilteredCountries(data);
-          localStorage.setItem("countries", JSON.stringify(data));
-        }
-      })
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
-  };
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (country) {
+        // دائماً نحول النتيجة إلى array حتى يسهل التعامل معها
+        setResult([data[0]]);
+      } else {
+        setResult(data);
+        setFilteredCountries(data);
+        localStorage.setItem("countries", JSON.stringify(data));
+      }
+    })
+    .catch(() => setIsError(true))
+    .finally(() => setIsLoading(false));
+};
+
 
   const fetchDataFromLocalstorage = () => {
     const data = JSON.parse(localStorage.getItem("countries"));

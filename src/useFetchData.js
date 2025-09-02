@@ -35,7 +35,7 @@ const fetchDataFromAPI = () => {
     .then((data) => {
       if (country) {
         // دائماً نحول النتيجة إلى array حتى يسهل التعامل معها
-        setResult([data[0]]);
+        setResult(data[0]);
       } else {
         setResult(data);
         setFilteredCountries(data);

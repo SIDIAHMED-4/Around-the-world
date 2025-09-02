@@ -12,7 +12,7 @@ export const useFetchData = (country) => {
     } else {
       fetchDataFromLocalstorage();
     }
-  }, [country]);
+  }, []);
 
   const fetchDataFromAPI = () => {
     let url = "https://restcountries.com/v3.1/all";

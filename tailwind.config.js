@@ -9,5 +9,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-rtl"), // ⬅️ هنا أضفنا الإضافة
+  ],
 };

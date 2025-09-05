@@ -1,6 +1,10 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const Logo = () => {
+  const { t } = useTranslation();
+
+
   return (
     <Link to="/" className="flex items-center gap-3 font-semibold">
       <svg
@@ -40,7 +44,7 @@ const Logo = () => {
           fill="#FAD52A"
         />
       </svg>
-      Around the world
+      {t("title")}
     </Link>
   );
 };

@@ -1,68 +1,60 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-export const useFetchData = (country) => {
-  const [result, setResult] = useState([]);
+export const useFetchData = (countryCode) => {
+  const { i18n } = useTranslation();
+  const [result, setResult] = useState(null);
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (country) {
+    if (countryCode) {
       fetchDataFromAPI();
     } else {
       fetchDataFromLocalstorage();
     }
-  }, []);
+  }, [countryCode]); // ✅ أضف i18n.language لتحديث الترجمات عند تغيير اللغة
 
-const fetchDataFromAPI = () => {
-  // رابط API صحيح مع تحديد الحقول المطلوبة
-  let url = "https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,languages,tld,currencies,languages";
+  const fetchDataFromAPI = async () => {
+    setIsLoading(true);
+    let url = "https://restcountries.com/v3.1/all?fields=name,flags,population,region,subregion,capital,tld,currencies,languages,cca3";
 
-  setIsLoading(true);
+    if (countryCode) {
+      url = `https://restcountries.com/v3.1/alpha/${countryCode}?fields=name,flags,population,region,subregion,capital,tld,currencies,languages,cca3`;
+    }
 
-  if (country) {
-    // إذا صفحة دولة واحدة
-    url = `https://restcountries.com/v3.1/name/${country}?fields=name,flags,population,region,subregion,capital,tld,currencies,languages`;
-  }
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Network response was not ok");
+      const data = await response.json();
 
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (country) {
-        // دائماً نحول النتيجة إلى array حتى يسهل التعامل معها
-        setResult(data[0]);
+      if (countryCode) {
+        const countryData = Array.isArray(data) ? data[0] : data;
+        setResult(countryData);
       } else {
-        setResult(data);
         setFilteredCountries(data);
+        setResult(data);
         localStorage.setItem("countries", JSON.stringify(data));
       }
-    })
-    .catch(() => setIsError(true))
-    .finally(() => setIsLoading(false));
-};
-
+    } catch (error) {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const fetchDataFromLocalstorage = () => {
     const data = JSON.parse(localStorage.getItem("countries"));
-
     if (data) {
-      setResult(data);
       setFilteredCountries(data);
+      setResult(data);
     } else {
       fetchDataFromAPI();
     }
   };
 
-  return {
-    result,
-    filteredCountries,
-    setFilteredCountries,
-    isLoading,
-    isError,
-  };
+  return { result, filteredCountries, setFilteredCountries, isLoading, isError };
 };
+
+

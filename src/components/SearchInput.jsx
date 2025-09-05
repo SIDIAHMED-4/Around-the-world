@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 const SearchInput = ({ countriesList, filterCountriesList }) => {
   const handleSearch = (e) => {
     e.preventDefault();
@@ -13,10 +15,14 @@ const SearchInput = ({ countriesList, filterCountriesList }) => {
 
     filterCountriesList(filteredCountries);
   };
-
+  const { t, i18n } = useTranslation();
   return (
-    <form className="relative flex-1" onSubmit={handleSearch}>
-      <div className="absolute left-8 top-5">
+    <form
+      className="relative flex-1"
+      onSubmit={handleSearch}
+      dir={i18n.language === "ar" ? "rtl" : "ltr"}
+    >
+      <div className="absolute top-5 ltr:left-8 rtl:right-8">
         <svg
           width="18"
           height="18"
@@ -38,8 +44,8 @@ const SearchInput = ({ countriesList, filterCountriesList }) => {
       <input
         type="text"
         name="search"
-        className="h-12 w-full max-w-md rounded-full pl-20 shadow dark:bg-gray-800 md:h-14"
-        placeholder="Search..."
+        className="h-12 w-full max-w-md rounded-full shadow dark:bg-gray-800 md:h-14 ltr:pl-20 rtl:pr-20"
+        placeholder={t("search")}
       />
     </form>
   );

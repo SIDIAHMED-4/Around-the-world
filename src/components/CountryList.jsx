@@ -7,12 +7,14 @@ const CountryList = ({ data }) => {
       {data && data.length ? (
         data.map((country) => (
           <CountryCard
-            key={country.name.official}
-            name={country.name.common}
+            key={country.cca3}          // ✅ المفتاح الفريد
+            displayName={country.name?.common || country.displayName} 
             population={country.population}
             region={country.region}
             capital={country.capital}
             flag={country.flags.svg}
+            tld={country.tld}
+            cca3={country.cca3}         // ✅ رمز الدولة الفريد للترجمة
           />
         ))
       ) : (
@@ -23,3 +25,4 @@ const CountryList = ({ data }) => {
 };
 
 export default CountryList;
+

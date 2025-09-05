@@ -1,27 +1,36 @@
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import Select from "react-select";
 
-const options = [
-  { value: "all regions", label: "All regions" },
-  { value: "africa", label: "Africa" },
-  { value: "asia", label: "Asia" },
-  { value: "europe", label: "Europe" },
-  { value: "oceania", label: "Oceania" },
-];
-
 const RegionMenu = ({ countriesList, filterCountriesList }) => {
-  const handleRegionChange = (e) => {
-    const region = e.label;
+  const { t, i18n } = useTranslation();
+  const options = useMemo(
+    () => [
+      { value: "all", label: t("All regions") },
+      { value: "Africa", label: t("Africa") },
+      { value: "Asia", label: t("Asia") },
+      { value: "Europe", label: t("Europe") },
+      { value: "Oceania", label: t("Oceania") },
+    ],
+    [t],
+  );
 
+  const handleRegionChange = (e) => {
+    const region = e.value; // القيمة دايمًا إنجليزية
     const filteredCountries =
-      region === "All regions"
+      region === "all"
         ? countriesList
         : countriesList.filter((country) => country.region === region);
 
     filterCountriesList(filteredCountries);
   };
+
+  const defaultValue = options[0];
+
   return (
     <Select
-      defaultValue={options[0]}
+      key={i18n.language} // إعادة الرندر عند تغيير اللغة
+      defaultValue={defaultValue}
       onChange={handleRegionChange}
       options={options}
       classNames={{

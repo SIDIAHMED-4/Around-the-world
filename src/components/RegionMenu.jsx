@@ -7,10 +7,10 @@ const RegionMenu = ({ countriesList, filterCountriesList }) => {
   const options = useMemo(
     () => [
       { value: "all", label: t("All regions") },
-      { value: "Africa", label: t("Africa") },
-      { value: "Asia", label: t("Asia") },
-      { value: "Europe", label: t("Europe") },
-      { value: "Oceania", label: t("Oceania") },
+      { value: "Africa", label: t("africa") },
+      { value: "Asia", label: t("asia") },
+      { value: "Europe", label: t("europe") },
+      { value: "Oceania", label: t("oceania") },
     ],
     [t],
   );

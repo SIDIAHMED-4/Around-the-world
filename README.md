@@ -5,6 +5,10 @@ The app supports **English** and **Arabic** using the `i18next` library for inte
 
 ---
 
+ ## 📸 Screenshots
+ 
+![App Screenshot](./around-the-world.png) 
+
 ## Table of Contents
 - [Demo](#demo)
 - [Features](#features)

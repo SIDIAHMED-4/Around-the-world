@@ -13,6 +13,7 @@ The app supports **English** and **Arabic** using the `i18next` library for inte
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+- [Author](#author)
 
 ---
 
@@ -42,7 +43,7 @@ Check out the live demo here:
 ## Installation
 
 1. Clone the repository:
-```bash
+bash
 git clone https://github.com/SIDIAHMED-4/around-the-world.git
 
 2. Navigate to the project folder:
@@ -53,7 +54,8 @@ cd around-the-world
 
 npm install
 
-Usage
+---
+## Usage
 
 Start the development server:
 
@@ -64,7 +66,9 @@ Open http://localhost:3000
 
 Switch between English and Arabic using the language selector.
 
-Contributing
+---
+
+## Contributing
 
 Contributions are welcome! Feel free to submit pull requests or report issues to help improve the project.
 
@@ -72,7 +76,13 @@ License
 
 This project is licensed under the MIT License.
 
-Author
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+## Author
 
 Sidi Ahmed – Front-End Developer
 

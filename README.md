@@ -90,7 +90,6 @@ This project is licensed under the MIT License.
 
 Sidi Ahmed – Front-End Developer
 
-LinkedIn: https://www.linkedin.com/in/sidiaahmed
+LinkedIn: www.linkedin.com/in/sidi-ahmed-🇵🇸-645859246
 
 GitHub: https://github.com/SIDIAHMED-4
->>>>>>> 36df588

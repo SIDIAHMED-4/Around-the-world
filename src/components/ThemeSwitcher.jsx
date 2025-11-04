@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 
-const activeCircleStyles = "flex items-center justify-center w-5 h-5 rounded-full";
+const activeCercleStyle =
+  "flex items-center justify-center w-5 h-5 rounded-full";
 
-const ThemeSwitcher = () => {
+function ThemeSwitcher() {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     const localTheme = localStorage.getItem("theme");
 
     toggleTheme(localTheme);
-  }, []);
+  });
 
   const toggleTheme = (theme) => {
     if (!theme) return;
@@ -25,14 +26,16 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <div className="flex w-14 h-8 items-center justify-around  rounded-full bg-[#2e2f33] dark:bg-black">
+    <div className="flex h-8 w-14 items-center justify-around rounded-full bg-[#371f34]">
       <button
-        className={`${activeCircleStyles} ${theme === "light" ? "bg-white" : ""}`}
+        className={`${activeCercleStyle} ${
+          theme === "light" ? "bg-white" : ""
+        }`}
         onClick={() => toggleTheme("light")}
       >
         <svg
-          width="14"
           className="fill-gray-800 dark:fill-gray-100"
+          width="14"
           height="13"
           viewBox="0 0 14 13"
           fill="none"
@@ -50,7 +53,7 @@ const ThemeSwitcher = () => {
         </svg>
       </button>
       <button
-        className={`${activeCircleStyles} ${theme === "dark" ? "bg-white" : ""}`}
+        className={`${activeCercleStyle} ${theme === "dark" ? "bg-white" : ""}`}
         onClick={() => toggleTheme("dark")}
       >
         <svg
@@ -59,7 +62,7 @@ const ThemeSwitcher = () => {
           height="12"
           viewBox="0 0 12 12"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns="http:  www.w3.org/2000/svg"
         >
           <path
             fillRule="evenodd"
@@ -70,6 +73,6 @@ const ThemeSwitcher = () => {
       </button>
     </div>
   );
-};
+}
 
 export default ThemeSwitcher;

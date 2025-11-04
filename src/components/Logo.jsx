@@ -1,15 +1,9 @@
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-
-const Logo = () => {
-  const { t } = useTranslation();
-
-
+function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-3 font-semibold">
+    <a className="flex items-center gap-3 font-semibold  ">
       <svg
         width="24"
-        height="28"
+        height="24"
         viewBox="0 0 24 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -44,9 +38,9 @@ const Logo = () => {
           fill="#FAD52A"
         />
       </svg>
-      {t("title")}
-    </Link>
+      Around the world
+    </a>
   );
-};
+}
 
 export default Logo;

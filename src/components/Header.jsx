@@ -1,21 +1,17 @@
-import Languages from "./Languages";
 import Logo from "./Logo";
-import ThemeSwitcher from "./ThemeSwithcer";
+import ThemeSwitcher from "./ThemeSwitcher";
 
-const Header = () => {
-
+function Header() {
   return (
-    <header className="mb-6 bg-white shadow dark:bg-gray-800 md:mb-12">
+    <header className="mb-6 bg-white shadow md:mb-12 dark:bg-gray-800">
       <div className="container mx-auto px-5 md:px-0">
         <div className="flex h-20 items-center justify-between">
           <Logo />
-          <Languages />
-
           <ThemeSwitcher />
         </div>
       </div>
     </header>
   );
-};
+}
 
 export default Header;
